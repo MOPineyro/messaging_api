@@ -23,7 +23,7 @@ describe "User registration" do
       post user_registration_path, params: generic_registration_params, headers: headers
       expect(response).to have_http_status(:created)
       expect(response).to have_header('Authorization')
-      expect(User.count).to eq(1)
+      expect(User.first.email).to eq("test@example.com")
     end
   end
 end
