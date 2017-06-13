@@ -24,27 +24,31 @@ describe "Create New Message" do
         receiver_email:    user_two.email
       }
     }
-
-  let(:message_params) do
-    {
-      message: {
-        body:    "Hey, homie!"
-      }
-    }
   end
+
+  # let(:message_params) do
+  #   {
+  #     message: {
+  #       body:    "Hey, homie"
+  #     }
+  #   }
+  # end
 
   it "creates a new conversation" do
     post user_session_path, params: auth_params, headers: headers
     authorization_header = response.headers['Authorization']
     post conversations_path, params: convo_params, headers: headers.merge('Authorization'=> authorization_header)
-    expect(json).to include_json(message: 'Conversation created')
+    expect(json).to include_json(status: 'Conversation created')
   end
 
   it "creates a new message" do
-    post user_session_path, params: correct_params, headers: headers
+    post user_session_path, params: auth_params, headers: headers
     authorization_header = response.headers['Authorization']
-    post messages_create_path, headers: headers.merge('Authorization'=> authorization_header)
-    expect(json).to include_json(message: 'Message Sent')
+    post conversations_path, params: convo_params, headers: headers.merge('Authorization'=> authorization_header)
+    conversation_id = JSON.parse(response.body)["id"]
+    message_params = { message: { body: "Hey, homie", conversation_id: conversation_id } }
+    post messages_path, params: message_params, headers: headers.merge('Authorization'=> authorization_header)
+    expect(json).to include_json(status: 'Message Sent')
   end
 
   # it "retrieves users conversations a new conversation" do

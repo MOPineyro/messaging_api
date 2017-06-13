@@ -16,6 +16,6 @@ class Api::V1::ConversationsController < ApplicationController
       @conversation = Conversation.create!(sender_id: sender_id, receiver_id: receiver_id)
     end
 
-    render json: { message: 'Conversation created', 'id': @conversation.id }
+    render json: { status: 'Conversation created', id: @conversation.id }
   end
 end

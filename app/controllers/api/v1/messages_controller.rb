@@ -10,8 +10,8 @@ class Api::V1::MessagesController < ApplicationController
   end
 
   def create
-    @message = @conversation.messages.new(user_id: current_user.id, body: params[:body], conversation_id: params[:conversation_id], user_email: current_user.email)
-    if @messages.save
+    @message = @conversation.messages.new(user_id: current_user.id, body: params[:message][:body], conversation_id: params[:message][:conversation_id], user_email: current_user.email)
+    if @message.save
       render json: { status: 'Message Sent' }, status: :ok
     else
       render json: { status: 'Message Failed to Send' }, status: :bad_request
@@ -21,7 +21,7 @@ class Api::V1::MessagesController < ApplicationController
 
   private
     def find_conversation
-      @conversation = Conversation.find(params[:conversation_id])
+      @conversation = Conversation.find(params[:message][:conversation_id])
       user_in_conversation?
     end
 

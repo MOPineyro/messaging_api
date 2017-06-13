@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   scope module: :api, defaults: {format: :json} do
     scope module: :v1, path: '/api/v1' do
       get '/hello', to: 'authorized#hello'
-      post '/messages', to: 'message#create'
+      post '/messages', to: 'messages#create'
       get '/conversations', to: 'conversations#index'
       post '/conversations', to: 'conversations#create'
     end
