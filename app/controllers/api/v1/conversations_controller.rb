@@ -3,8 +3,8 @@ class Api::V1::ConversationsController < ApplicationController
   before_action :set_current_user
 
   def index
-    @users_email = User.all
-    render json: @users_email
+    @conversations = Conversation.where(receiver_id: current_user.id).or(Conversation.where(sender_id: current_user.id))
+    render json: @conversations
   end
 
   def create
