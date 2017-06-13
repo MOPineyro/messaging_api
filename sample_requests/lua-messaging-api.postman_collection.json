@@ -1,0 +1,151 @@
+{
+	"variables": [],
+	"info": {
+		"name": "lus-messaing-api",
+		"_postman_id": "6c7b4843-4728-4911-4a86-6c7ec84072a8",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User registration",
+			"request": {
+				"url": "http://localhost:3000/api/v1/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user\": {\n    \"email\": \"test@example.com\",\n    \"password\": \"anewpassword\",\n    \"password_confirmation\": \"anewpassword\"\n  }\n}"
+				},
+				"description": "User registration"
+			},
+			"response": []
+		},
+		{
+			"name": "User Log In",
+			"request": {
+				"url": "http://localhost:3000/api/v1/users/sign_in",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user\": {\n    \"email\": \"one_test@example.com\",\n    \"password\": \"test123\"\n  }\n}"
+				},
+				"description": "User Login"
+			},
+			"response": []
+		},
+		{
+			"name": "Create new conversation",
+			"request": {
+				"url": "http://localhost:3000/api/v1/conversations/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzZDI4YjNlZi0xMWI1LTRhOTktYjg0My01N2RkMDc3YzdkYzUiLCJzdWIiOiIxIiwic2NwIjoidXNlciIsImlhdCI6MTQ5NzM1MzE1MywiZXhwIjoxNDk3MzU2NzUzfQ.sV13I1uAvA0hDa_eKPUx0Bsx01uodbKiG30diOk3Pjw",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"conversation\": {\n\t\t\"receiver_email\": \"two_test@example.com\"\n\t}\n}"
+				},
+				"description": "User "
+			},
+			"response": []
+		},
+		{
+			"name": "Create new message",
+			"request": {
+				"url": "http://localhost:3000/api/v1/messages/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzZDI4YjNlZi0xMWI1LTRhOTktYjg0My01N2RkMDc3YzdkYzUiLCJzdWIiOiIxIiwic2NwIjoidXNlciIsImlhdCI6MTQ5NzM1Njc5MSwiZXhwIjoxNDk3MzYwMzkxfQ.moRGj-lCFk3_aM66d25d8g_GsS_LyiPEibyoROCyE_E",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"message\": {\n\t\t\"body\": \"Hey, homie\",\n\t\t\"conversation_id\": 1\n\t}\n}"
+				},
+				"description": "User "
+			},
+			"response": []
+		},
+		{
+			"name": "Get all user's conversations",
+			"request": {
+				"url": "http://localhost:3000/api/v1/conversations/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzZDI4YjNlZi0xMWI1LTRhOTktYjg0My01N2RkMDc3YzdkYzUiLCJzdWIiOiIxIiwic2NwIjoidXNlciIsImlhdCI6MTQ5NzM1Njc5MSwiZXhwIjoxNDk3MzYwMzkxfQ.moRGj-lCFk3_aM66d25d8g_GsS_LyiPEibyoROCyE_E",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"conversation\": {\n\t\t\"receiver_email\": \"two_test@example.com\"\n\t}\n}"
+				},
+				"description": "User "
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users",
+			"request": {
+				"url": "http://localhost:3000/api/v1/conversations/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzZDI4YjNlZi0xMWI1LTRhOTktYjg0My01N2RkMDc3YzdkYzUiLCJzdWIiOiIxIiwic2NwIjoidXNlciIsImlhdCI6MTQ5NzM1Njc5MSwiZXhwIjoxNDk3MzYwMzkxfQ.moRGj-lCFk3_aM66d25d8g_GsS_LyiPEibyoROCyE_E",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"conversation\": {\n\t\t\"receiver_email\": \"two_test@example.com\"\n\t}\n}"
+				},
+				"description": "User "
+			},
+			"response": []
+		}
+	]
+}
