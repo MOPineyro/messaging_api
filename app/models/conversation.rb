@@ -5,9 +5,10 @@ class Conversation < ApplicationRecord
   has_many :messages, dependent: :destroy
 
   validates_uniqueness_of :sender_id, scope: :receiver_id
+  validates_uniqueness_of :receiver_id, scope: :sender_id
 
   scope :between, -> (sender_id, receiver_id) do 
-    where("(conversations.sender_id = ? AND conversations.receiver_id = ?) OR (conversations.sender_id = ? AND conversations.receiver_id = ?)", sender_id, receiver_id, receiver_id, sender_id)
+    Conversation.where(receiver_id: sender_id, sender_id: receiver_id).or(Conversation.where(sender_id: sender_id, receiver_id: receiver_id))
   end
   
 end

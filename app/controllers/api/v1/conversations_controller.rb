@@ -12,10 +12,12 @@ class Api::V1::ConversationsController < ApplicationController
     receiver_id = User.where(email: params[:conversation][:receiver_email])[0][:id]
     if Conversation.between(sender_id, receiver_id).present?
       @conversation = Conversation.between(sender_id, receiver_id).first
+
+      render json: @conversation, status: :ok
     else
       @conversation = Conversation.create!(sender_id: sender_id, receiver_id: receiver_id)
-    end
 
-    render json: { status: 'Conversation created', id: @conversation.id }
+      render json: @conversation, status: :created
+    end
   end
 end
