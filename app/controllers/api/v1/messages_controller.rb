@@ -5,7 +5,7 @@ class Api::V1::MessagesController < ApplicationController
 
   def index
     @messages = @conversation.messages.order(:created_at)
-    paginate json: @messages, per_page: 20
+    paginate json: @messages, per_page: 25
   end
 
   def create
@@ -19,8 +19,12 @@ class Api::V1::MessagesController < ApplicationController
 
   private
     def find_conversation
-      @conversation = Conversation.find(params[:message][:conversation_id])
-      user_in_conversation?
+      unless params[:message][:conversation_id].nil?
+        @conversation = Conversation.find(params[:message][:conversation_id]).includes(:messages)
+        user_in_conversation?
+      else 
+        @conversation = Conversation.find(params[:conversation_id])
+      end
     end
 
     def user_in_conversation?

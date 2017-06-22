@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       post '/messages', to: 'messages#create'
       get '/conversations', to: 'conversations#index'
       post '/conversations', to: 'conversations#create'
+      get '/conversations/:conversation_id/messages', to: 'messages#index'
     end
   end
 
