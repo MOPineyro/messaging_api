@@ -3,7 +3,7 @@ class Api::V1::ConversationsController < ApplicationController
   before_action :set_current_user
 
   def index
-    @conversations = Conversation.where(receiver_id: current_user.id).or(Conversation.where(sender_id: current_user.id))
+    @conversations = Conversation.where(receiver_id: current_user.id).or(Conversation.where(sender_id: current_user.id)).includes(:messages)
     render json: @conversations
   end
 

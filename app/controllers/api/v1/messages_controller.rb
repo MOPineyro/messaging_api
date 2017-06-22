@@ -9,7 +9,7 @@ class Api::V1::MessagesController < ApplicationController
   end
 
   def create
-    @message = @conversation.messages.new(user_id: current_user.id, body: params[:message][:body], conversation_id: @conversation.id, user_email: current_user.email)
+    @message = @conversation.messages.new(sender_id: current_user.id, body: params[:message][:body], conversation_id: @conversation.id)
     if @message.save
       render json: @message, status: :created
     else
@@ -25,7 +25,7 @@ class Api::V1::MessagesController < ApplicationController
 
     def user_in_conversation?
       if not (current_user.id == @conversation.sender_id or current_user.id == @conversation.receiver_id)
-        render json: { error: "Invalid user!", status: :bad_request }, status: :bad_request
+        render json: { error: "Invalid user!" }, status: :bad_request
       end
     end
 
