@@ -37,7 +37,7 @@ describe "Messages & Conversations" do
     post user_session_path, params: auth_params, headers: headers
     authorization_header = response.headers['Authorization']
     post conversations_path, params: convo_params, headers: headers.merge('Authorization'=> authorization_header)
-    conversation_id = JSON.parse(response.body)["id"]
+    conversation_id = JSON.parse(response.body)["data"]["id"]
     message_params = { message: { body: "Hey, homie", conversation_id: conversation_id } }
     post messages_path, params: message_params, headers: headers.merge('Authorization'=> authorization_header)
     expect(response).to have_http_status(:created)
@@ -47,7 +47,7 @@ describe "Messages & Conversations" do
     post user_session_path, params: auth_params, headers: headers
     authorization_header = response.headers['Authorization']
     post conversations_path, params: convo_params, headers: headers.merge('Authorization'=> authorization_header)
-    conversation_id = JSON.parse(response.body)["id"]
+    conversation_id = JSON.parse(response.body)["data"]["id"]
     message_params = { message: { body: "Hey, homie", conversation_id: conversation_id } }
     post messages_path, params: message_params, headers: headers.merge('Authorization'=> authorization_header)
     get conversations_path, headers: headers.merge('Authorization'=> authorization_header)
