@@ -4,7 +4,7 @@ class Api::V1::ConversationsController < ApplicationController
 
   def index
     @conversations = Conversation.where(receiver_id: current_user.id).or(Conversation.where(sender_id: current_user.id)).includes(:messages)
-    render json: @conversations
+    paginate json: @conversations, per_page: 20
   end
 
   def create

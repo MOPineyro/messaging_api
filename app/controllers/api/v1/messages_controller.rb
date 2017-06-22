@@ -5,7 +5,7 @@ class Api::V1::MessagesController < ApplicationController
 
   def index
     @messages = @conversation.messages.order(:created_at)
-    render json: @messages
+    paginate json: @messages, per_page: 20
   end
 
   def create
